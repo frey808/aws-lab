@@ -1,5 +1,0 @@
-host: localhost
-database: skatedb
-user: frey
-password: k33pSkating!
-port: 5432
