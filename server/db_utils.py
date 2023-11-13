@@ -7,7 +7,7 @@ def connect():
         port=3306,
         user='sophiagallegos',
         password='vdmOkBp5Lq1#uRT8',
-        database='ff-db'
+        database='FIERCEFASHION'
     )
 
 def exec_sql_file(path):
