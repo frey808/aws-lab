@@ -1,7 +1,0 @@
-DROP TABLE IF EXISTS skate;
-
-CREATE TABLE skate(
-  id SERIAL PRIMARY KEY,
-  trick VARCHAR(16) NOT NULL,
-  difficulty INT
-);

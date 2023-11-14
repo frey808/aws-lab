@@ -2,37 +2,30 @@ from wsgiref.simple_server import make_server
 from pyramid.config import Configurator
 from pyramid.response import Response
 import os
+from db_utils import *
 
-def hello_world(request):
-    name = os.environ.get('NAME')
-    if name == None or len(name) == 0:
-        name = "world"
-    message = "hello, " + name + "!\n"
-    return Response(message)
+def get_data(request):
+    data = exec_get_all("SELECT * from test")
+    result = {}
+    for entry in data:
+        result[entry[0]] = {
+            "id": entry[0],
+            "name": entry[1]
+        }
+    return Response(str(result))
 
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT"))
-    with Configurator() as config:
-        config.add_route('hello', '/')
-        config.add_view(hello_world, route_name='hello')
-        app = config.make_wsgi_app()
-    server = make_server('0.0.0.0', port, app)
-    server.serve_forever()
+def test_route(request):
+    return Response("testing")
     
-# from flask import Flask
-# from flask_restful import Resource, Api
-
-# from server.api.resources import *
-# from server.db.setup import *
-
-# app = Flask(__name__) #create Flask instance
-# api = Api(app) #api router
-
-# api.add_resource(Data,'/')
-# api.add_resource(Edit,'/edit')
-
-# if __name__ == '__main__':
-#     print("Loading db")
-#     rebuild()
-#     print("Starting flask")
-#     app.run(debug=True)
+if __name__ == '__main__':
+    # port = int(os.environ.get("PORT"))
+    port = 8080
+    with Configurator() as config:
+        config.add_route('data', '/')
+        config.add_view(get_data, route_name='data')
+        config.add_route('test', '/test')
+        config.add_view(test_route, route_name='test')
+        app = config.make_wsgi_app()
+    server = make_server('0.0.0.0', port, app) #for deployment ONLY - comment out while testing locally
+    # server = make_server('127.0.0.1', port, app) #for local testing ONLY - comment out before pushing
+    server.serve_forever()

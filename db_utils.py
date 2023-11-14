@@ -10,7 +10,7 @@ def connect():
         database='FIERCEFASHION'
     )
 
-def exec_sql_file(path):
+def exec_sql_file(path): #might not work
     full_path = os.path.join(os.path.dirname(__file__), path)
     conn = connect()
     cur = conn.cursor()
