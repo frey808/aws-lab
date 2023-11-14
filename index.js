@@ -1,14 +1,3 @@
-// static database manipulation and testing
-require('dotenv').config()
-const mysql = require('mysql2')
-const connection = mysql.createConnection(process.env.DATABASE_URL)
-connection.query('SHOW TABLES', function(err, results){console.log(results)})
-connection.query('SELECT * FROM items', function(err, results){console.log(results)})
-// connection.query('CREATE TABLE items(id SERIAL PRIMARY KEY, name VARCHAR(31))', function(err, results){console.log(results)})
-// connection.query('DROP TABLE IF EXISTS items', function(err, results){console.log(results)})
-// connection.query('INSERT INTO items (id, name) VALUES (1, "test item")', function(err, results){console.log(results)})
-connection.end()
-
 function openNav(){
     document.getElementById("nav").style.display = "inline";
     document.getElementById("opennav").style.display = "none";
@@ -24,11 +13,7 @@ function swap(){
 }
 
 function getData(){
-    const connection = mysql.createConnection(process.env.DATABASE_URL)
-    connection.query('SELECT * FROM items', function (err, results) {
-        document.getElementById("test").innerHTML = results;
-    })
-    connection.end()
+    // 'SELECT * FROM items' // use for testing
 }
 
 function createItem(){
