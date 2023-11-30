@@ -17,8 +17,8 @@ function swap(){
 }
 
 function fetchData(){
-    // fetch('https://mqbmmuwreh.us-east-2.awsapprunner.com/').then((response) => { //for deployment ONLY - comment out while testing locally
-    fetch('http://localhost:8080/').then((response) => { //for local testing ONLY - comment out before pushing
+    fetch('https://mqbmmuwreh.us-east-2.awsapprunner.com/').then((response) => { //for deployment ONLY - comment out while testing locally
+    // fetch('http://localhost:8080/').then((response) => { //for local testing ONLY - comment out before pushing
         if (response.status === 200){
             return (response.json()) ;
         }else{
